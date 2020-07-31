@@ -2,14 +2,13 @@
     <div class="question-box-container">
         <b-jumbotron>
             <template v-slot:lead>
-                {{currentQuestion.question}}
+                {{ currentQuestion.question }}
             </template>
 
             <hr class="my-4">
 
             <p v-for="(answer, index) in answers" :key="index">
-                
-                {{ answer }}
+                {{answer}}
             </p>
 
             <b-button variant="primary" href="#">Submit Button</b-button>
@@ -26,6 +25,16 @@ export default {
     props: {
         currentQuestion: Object,
         next: Function
+    },
+    computed: {
+    answers(){
+        let answers = [...this.currentQuestion.incorrect_answers]
+        answers.push(this.currentQuestion.correct_answer)
+        return answers
+    }
+  },
+  mounted() {
+      console.log(this.currentQuestion)
     }
 }
 </script>
